@@ -1,0 +1,20 @@
+{
+    "asset": "df41c85aa66c05b40923f400e17a53f5",
+    "fileName": "019b8432-1ad3-77f4-b407-af687c5c9a35.png",
+    "prompt": "Small, Cute, Pixel Character, boy, 32 * 32 pixel",
+    "negativePrompt": "",
+    "model": "5b5b2af1-6ea4-4266-b087-cc9f3bf4f450",
+    "modelName": "Flux.1 Dev",
+    "customSeed": -1,
+    "w3CTraceId": "1c534c70acc885f286f1bc1f38bdd934",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

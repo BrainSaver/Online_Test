@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6698076906702642458
+--- !u!1 &1225821180532085351
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1718607901887147137}
-  - component: {fileID: 173526578603231770}
-  - component: {fileID: 2772399648353380128}
+  - component: {fileID: 8392678193373963954}
+  - component: {fileID: 4058324520730864929}
+  - component: {fileID: 7197769620459617005}
   m_Layer: 0
   m_Name: LobbyPlayer
   m_TagString: Untagged
@@ -18,13 +18,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1718607901887147137
+--- !u!4 &8392678193373963954
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6698076906702642458}
+  m_GameObject: {fileID: 1225821180532085351}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,14 +33,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &173526578603231770
+--- !u!212 &4058324520730864929
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6698076906702642458}
+  m_GameObject: {fileID: 1225821180532085351}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -92,31 +92,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2772399648353380128
+--- !u!114 &7197769620459617005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6698076906702642458}
+  m_GameObject: {fileID: 1225821180532085351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9012936608e74d941b3b4403c891e911, type: 3}
+  m_Script: {fileID: 11500000, guid: 104f5c3e49fc64044a9172e708838bc8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LobbyCustomizer
-  characterRenderer: {fileID: 173526578603231770}
-  nickNameInput: {fileID: 0}
-  leftBtn: {fileID: 0}
-  rightBtn: {fileID: 0}
-  startBtn: {fileID: 0}
-  colorMaterials:
-  - {fileID: 2100000, guid: 621f48838740b0f4da06aaf17de258fb, type: 2}
-  - {fileID: 2100000, guid: 02c29b43b15e1a54c9dfa8ed08ccfb12, type: 2}
-  - {fileID: 2100000, guid: be9e6cdcafa1b1646b4eaab7bd84ec0b, type: 2}
-  - {fileID: 2100000, guid: 7254c0ee547b0c347a4604a6b6046f50, type: 2}
-  - {fileID: 2100000, guid: c4ad9ca4ba95a00418d6fc4670da1270, type: 2}
-  - {fileID: 2100000, guid: 6c4ea37f6a72f8842b97c36135b5374e, type: 2}
-  - {fileID: 2100000, guid: 296685a7da8108448ad32c3319c39622, type: 2}
-  - {fileID: 2100000, guid: 379175695b245764cb3392353b757960, type: 2}
-  customizationPanel: {fileID: 0}
-  lobbyMainPanel: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterColorChanger
+  colorMaterials: []
+  targetRenderer: {fileID: 4058324520730864929}
+  prevButton: {fileID: 0}
+  nextButton: {fileID: 0}

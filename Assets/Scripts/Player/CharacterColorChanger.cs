@@ -1,71 +1,67 @@
-using UnityEngine;
-using UnityEngine.UI; // ¹öÆ° »ç¿ë
+ï»¿using UnityEngine;
+using UnityEngine.UI; // ë²„íŠ¼ ê¸°ëŠ¥ì„ ì“°ê¸° ìœ„í•´ í•„ìˆ˜
+using System.Collections.Generic;
 
 public class CharacterColorChanger : MonoBehaviour
 {
-    [Header("1. ¹Ù²Ü »ö»óµé (¸ÓÆ¼¸®¾ó) - °è¼Ó Ãß°¡ °¡´É")]
-    public Material[] colorMaterials;
+    [Header("1. ë°”ê¿€ ìƒ‰ìƒë“¤ (ë¨¸í‹°ë¦¬ì–¼)")]
+    public List<Material> colorMaterials;
+    public SpriteRenderer targetRenderer;
 
-    [Header("2. »öÀÌ º¯ÇÒ ·»´õ·¯ (Ä³¸¯ÅÍ ¸ğµ¨)")]
-    public Renderer targetRenderer;
+    [Header("2. ë²„íŠ¼ì„ ì—¬ê¸°ì— ë“œë˜ê·¸í•´ì„œ ë„£ìœ¼ì„¸ìš”")]
+    public Button prevButton; // ì´ì „ ë²„íŠ¼ (<)
+    public Button nextButton; // ë‹¤ìŒ ë²„íŠ¼ (>)
 
-    [Header("3. ¹öÆ° ¿¬°á")]
-    public Button prevButton; // ÀÌÀü »ö ¹öÆ°
-    public Button nextButton; // ´ÙÀ½ »ö ¹öÆ°
-
-    // ÇöÀç ¸î ¹øÂ° »öÀÎÁö ±â¾ïÇÏ´Â º¯¼ö
-    private int currentIndex = 0;
+    // ì €ì¥ìš© ë³€ìˆ˜
+    public int currentIndex = 0;
 
     void Start()
     {
-        // ¸¸¾à ·»´õ·¯¸¦ ±ôºıÇÏ°í ¾È ³Ö¾úÀ¸¸é, ³» ¸öÅë(GetComponent)¿¡¼­ Ã£½À´Ï´Ù.
-        if (targetRenderer == null)
+        // 1. ë‹¤ìŒ ë²„íŠ¼ ì—°ê²°
+        if (nextButton != null)
         {
-            targetRenderer = GetComponent<Renderer>();
+            nextButton.onClick.RemoveAllListeners(); // í˜¹ì‹œ ëª¨ë¥¼ ì¤‘ë³µ ì œê±°
+            nextButton.onClick.AddListener(NextColor);
         }
 
-        // ¹öÆ° ±â´É ¿¬°á
-        if (nextButton != null) nextButton.onClick.AddListener(OnNextClick);
-        if (prevButton != null) prevButton.onClick.AddListener(OnPrevClick);
+        // 2. ì´ì „ ë²„íŠ¼ ì—°ê²° (ì—¬ê¸°ê°€ ì•ˆ ë˜ì…¨ë˜ ë¶€ë¶„)
+        if (prevButton != null)
+        {
+            prevButton.onClick.RemoveAllListeners(); // í˜¹ì‹œ ëª¨ë¥¼ ì¤‘ë³µ ì œê±°
+            prevButton.onClick.AddListener(PrevColor);
+        }
 
-        // ½ÃÀÛÇÒ ¶§ Ã¹ ¹øÂ° »öÀ¸·Î ¼¼ÆÃ
-        ApplyColor();
+        // ì´ˆê¸° ìƒ‰ìƒ ì ìš©
+        UpdateColor();
     }
 
-    // ´ÙÀ½ ¹öÆ° ´­·¶À» ¶§
-    void OnNextClick()
+    // ë‹¤ìŒ ìƒ‰ìƒ ë°”ê¾¸ê¸°
+    public void NextColor()
     {
-        if (colorMaterials.Length == 0) return;
-
         currentIndex++;
-        // ¸¶Áö¸· »ö ´ÙÀ½¿£ ´Ù½Ã Ã³À½(0¹ø)À¸·Î µ¹¾Æ°¨
-        if (currentIndex >= colorMaterials.Length)
-        {
-            currentIndex = 0;
-        }
-
-        ApplyColor();
+        if (currentIndex >= colorMaterials.Count) currentIndex = 0;
+        UpdateColor();
     }
 
-    // ÀÌÀü ¹öÆ° ´­·¶À» ¶§
-    void OnPrevClick()
+    // ì´ì „ ìƒ‰ìƒ ë°”ê¾¸ê¸°
+    public void PrevColor()
     {
-        if (colorMaterials.Length == 0) return;
-
         currentIndex--;
-        // Ã³À½(0¹ø) ÀÌÀü¿£ ¸¶Áö¸· ¹øÈ£·Î µ¹¾Æ°¨
-        if (currentIndex < 0)
-        {
-            currentIndex = colorMaterials.Length - 1;
-        }
-
-        ApplyColor();
+        if (currentIndex < 0) currentIndex = colorMaterials.Count - 1; // 0ë³´ë‹¤ ì‘ì•„ì§€ë©´ ë§¨ ë’¤ë¡œ
+        UpdateColor();
     }
 
-    // ½ÇÁ¦ »öÀ» ÀÔÈ÷´Â ÇÔ¼ö
-    void ApplyColor()
+    // ì €ì¥ëœ ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°ìš©
+    public void SetColorIndex(int index)
     {
-        if (targetRenderer != null && colorMaterials.Length > 0)
+        currentIndex = index;
+        if (currentIndex < 0 || currentIndex >= colorMaterials.Count) currentIndex = 0;
+        UpdateColor();
+    }
+
+    void UpdateColor()
+    {
+        if (targetRenderer != null && colorMaterials.Count > 0)
         {
             targetRenderer.material = colorMaterials[currentIndex];
         }
